@@ -13,17 +13,31 @@
         async function initMap() {
         const { Map } = await google.maps.importLibrary("maps");
 
-        let items = [
-            [1, 2],
-            [3, 4],
-            [5, 6]
-        ];
-
 
         var heatMapData = [
         {location: new google.maps.LatLng(37.782, -122.447), weight: 1},
 
         ];
+
+
+        const CSVToArray = (data, delimiter = ',', omitFirstRow = false) =>
+     data
+       .slice(omitFirstRow ? data.indexOf('\n') + 1 : 0)
+       .split('\n')
+       .map(v => v.split(delimiter));
+
+        fetch('https://raw.githubusercontent.com/Singularlty/correlationCanvas/main/world_population.csv')
+     .then(response => response.text())
+     .then(csvData => {
+        const parsedData = CSVToArray(csvData, ",");
+        
+        for (let i = 1; i < 235; i++) {
+            console.log(parsedData[i][17],parsedData[i][18]);
+            heatMapData.push({location: new google.maps.LatLng(parsedData[i][17],parsedData[i][18]), weight: 1})
+        }
+
+     })
+     .catch(error => console.error('Error:', error));
 
         var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
 
