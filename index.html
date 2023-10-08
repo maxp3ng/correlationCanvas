@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> Correlation Canvas </title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAysr46gOYvzuYLq-DdquvNagJAtHlHoK4"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', initMap);
+
+        async function initMap() {
+        const { Map } = await google.maps.importLibrary("maps");
+
+        map = new Map(document.getElementById("map"), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8,
+            mapId: '993fa51f817a7a04'
+        });
+        const ctaLayer = new google.maps.KmlLayer({
+            url: "https://drive.google.com/file/d/1vJbM_ld-WY0KNzduDbdqALtePe_PdAkq/view?usp=sharing",
+            map: map,
+        });
+        }
+        window.initMap = initMap;
+
+    </script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="style.css">
+  </head>
+
+
+  <body>
+
+    
+    <div class="header">
+        <nav>
+            <a href="index.html">  <h1 > 🗺️  correlation <h1 style="color: #5f82ff;"> canvas </h1></h1> </a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">canvas</a></li>
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="references.html">references</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+    </div>
+
+
+
+
+    <div id="map"></div>
+
+
+
+  </body>
+</html>
+    
