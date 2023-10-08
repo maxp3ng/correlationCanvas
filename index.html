@@ -4,7 +4,7 @@
 <html>
   <head>
     <title> Correlation Canvas </title>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAysr46gOYvzuYLq-DdquvNagJAtHlHoK4"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAysr46gOYvzuYLq-DdquvNagJAtHlHoK4&libraries=visualization"></script>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script>
@@ -13,15 +13,40 @@
         async function initMap() {
         const { Map } = await google.maps.importLibrary("maps");
 
-        map = new Map(document.getElementById("map"), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8,
-            mapId: '993fa51f817a7a04'
+        let items = [
+            [1, 2],
+            [3, 4],
+            [5, 6]
+        ];
+
+
+        var heatMapData = [
+        {location: new google.maps.LatLng(37.782, -122.447), weight: 1},
+
+        ];
+
+        var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
+
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: sanFrancisco,
+        zoom: 13,
+        mapTypeId: 'satellite'
         });
-        const ctaLayer = new google.maps.KmlLayer({
-            url: "https://drive.google.com/file/d/1vJbM_ld-WY0KNzduDbdqALtePe_PdAkq/view?usp=sharing",
-            map: map,
+
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+        data: heatMapData
         });
+        heatmap.setMap(map);
+        
+        // map = new Map(document.getElementById("map"), {
+        //     center: { lat: -34.397, lng: 150.644 },
+        //     zoom: 8,
+        //     mapId: '993fa51f817a7a04'
+        // });
+        // const ctaLayer = new google.maps.KmlLayer({
+        //     url: "https://drive.google.com/file/d/1vJbM_ld-WY0KNzduDbdqALtePe_PdAkq/view?usp=sharing",
+        //     map: map,
+        // });
         }
         window.initMap = initMap;
 
